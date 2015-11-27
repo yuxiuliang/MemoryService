@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <link rel="shortcut icon" href="http://love-love-l.blog.163.com/blog/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="../framework/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+<button onclick="login()">登录</button>
+<button onclick="register()">注册</button>
+<script type="text/javascript">
+    var url = "http://localhost:7070/SuperiorFamilyEducationService/userService/login";
+    var obj={
+        name:"123",
+        password:"123"
+    };
+    var json = JSON.stringify(obj);
+    var login=function(){
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {
+                login:json
+            },
+            async: true,
+            success: function (data) {
+                var map = data;
+                var aa = eval("(" + map + ")");
+                var a=aa.mark;
+                if(a==1){
+                    alert("登录成功");
+                }else {
+                    alert("登录失败");
+                }
+            },
+            error: function (date) {
+                alert("报错");
+                console.log(JSON.stringify(date));
+            }
+        });
+    };
+    var register=function(){
+        var url = "http://localhost:7070/SuperiorFamilyEducationService/userService/register";
+        var obj={
+            name:"1231",
+            password:"1231"
+        };
+        var json = JSON.stringify(obj);
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {
+                login:json
+            },
+            async: true,
+            success: function (data) {
+                var map = data;
+                var aa = eval("(" + map + ")");
+                var a=aa.mark;
+                if(a==1){
+                    alert("注册成功");
+                }else if (a==0){
+                    alert("注册失败");
+                }else {
+                    alert("注册失败"+aa.messages);
+                }
+            },
+            error: function (date) {
+                alert("报错");
+                console.log(JSON.stringify(date));
+            }
+        });
+    }
+</script>
+</body>
+</html>
